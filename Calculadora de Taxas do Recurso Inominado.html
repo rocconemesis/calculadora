@@ -1,0 +1,69 @@
+<html lang="pt-BR" xmlns="http://www.w3.org/1999/xhtml" xml:lang="pt-br">
+<meta name="language" content="pt-br" />
+<meta http-equiv="Content-Language" content="pt-br" />
+<head>
+	<title>Rocco - Calculadora de Taxas do Recurso Inominado</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+
+<font face="Arial">
+	<h1>Calculadora do Recurso Inominado</h1>
+	<form>
+		<label for="valor-causa">Valor da Causa ou da Condenação:</label>
+		<input type="number" id="valor-causa" name="valor-causa" required> 	&#32;
+
+		<button type="button" onclick="calcularTaxas()">Calcular</button><br><br>
+
+		<button type="button" onclick="calcularTaxasExtraJud()">Calcular Extrajudicial</button><br><br>
+
+		<label for="taxa-ingresso">Taxa de Ingresso:</label>
+		<input type="number" id="taxa-ingresso" name="taxa-ingresso" readonly><br><br>
+
+		<label for="taxa-preparo">Taxa de Preparo:</label>
+		<input type="number" id="taxa-preparo" name="taxa-preparo" readonly><br><br>
+
+		<label for="valor-total"><b>Valor Total das Taxas do Recurso Inominado: </b></label>
+		<input type="number" id="valor-total" name="valor-total" readonly><br><br>
+	</form>
+
+
+<h4>Atualizado até 2024 - Márcio Rocco</h4>
+	<script>
+		const VALOR_UFESP = 35.36;
+		const TAXA_INGRESSO_MINIMA = 5 * VALOR_UFESP;
+		const TAXA_PREPARO_MINIMA = 5 * VALOR_UFESP;
+
+		function calcularTaxas() {
+			let valorCausa = parseFloat(document.getElementById("valor-causa").value);
+
+			let taxaIngresso = Math.max(TAXA_INGRESSO_MINIMA, valorCausa * 0.015);
+			document.getElementById("taxa-ingresso").value = taxaIngresso.toFixed(2);
+
+			let taxaPreparo = Math.max(TAXA_PREPARO_MINIMA, valorCausa * 0.04);
+			document.getElementById("taxa-preparo").value = taxaPreparo.toFixed(2);
+
+			let valorTotal = taxaIngresso + taxaPreparo;
+			document.getElementById("valor-total").value = valorTotal.toFixed(2);
+		}
+
+
+
+		function calcularTaxasExtraJud() {
+			let valorCausa = parseFloat(document.getElementById("valor-causa").value);
+
+			let taxaIngresso = Math.max(TAXA_INGRESSO_MINIMA, valorCausa * 0.02);
+			document.getElementById("taxa-ingresso").value = taxaIngresso.toFixed(2);
+
+			let taxaPreparo = Math.max(TAXA_PREPARO_MINIMA, valorCausa * 0.04);
+			document.getElementById("taxa-preparo").value = taxaPreparo.toFixed(2);
+
+			let valorTotal = taxaIngresso + taxaPreparo;
+			document.getElementById("valor-total").value = valorTotal.toFixed(2);
+		}
+
+	</script>
+</font>
+
+</body>
+</html>
